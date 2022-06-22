@@ -127,3 +127,14 @@
 .form > button {
   margin-top: 24px;
 }
+
+.error {
+  font-size: 0.75rem;
+  color: crimson;
+  text-align: center;
+}
+
+.loginSuccess {
+  font-size: 0.75rem;
+  color: chartreuse;
+}
