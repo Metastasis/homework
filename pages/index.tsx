@@ -1,9 +1,19 @@
+import React from 'react';
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import {Input, Button} from '@features/ui-kit'
+import styles from './Home.module.css'
+
 
 const Home: NextPage = () => {
+  const [login, onChangeLogin] = React.useState('')
+  const [password, onChangePassword] = React.useState('')
+  const onSubmit: React.FormEventHandler<HTMLFormElement> = React.useCallback((event) => {
+    event.preventDefault()
+    const data = {login, password}
+    console.log(data)
+  }, [login, password])
   return (
     <div className={styles.container}>
       <Head>
@@ -14,8 +24,19 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Вход
         </h1>
+
+        <form
+          className={styles.form}
+          autoComplete="off"
+          onSubmit={onSubmit}
+          noValidate
+        >
+          <Input name="login" placeholder="Логин" value={login} onChange={onChangeLogin} />
+          <Input name="password" placeholder="Пароль" value={password} onChange={onChangePassword} />
+          <Button type="submit">Войти</Button>
+        </form>
 
         <p className={styles.description}>
           Get started by editing{' '}
