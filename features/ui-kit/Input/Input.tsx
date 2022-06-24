@@ -11,12 +11,13 @@ interface InputProps {
   onChange: (value: string) => void,
   value: string,
   placeholder?: string,
+  disabled?: boolean,
   onFocus?: FocusEventHandler<HTMLInputElement>
   onBlur?: FocusEventHandler<HTMLInputElement>
 }
 
 const Input = (props: InputProps) => {
-  const {name, placeholder, value, onFocus, onBlur, onChange} = props
+  const {name, placeholder, value, disabled, onFocus, onBlur, onChange} = props
   const onChangeValue = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => onChange(event.target.value),
     [onChange]
@@ -31,6 +32,7 @@ const Input = (props: InputProps) => {
       onChange={onChangeValue}
       onFocus={onFocus}
       onBlur={onBlur}
+      disabled={disabled}
     />
   )
 }
