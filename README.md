@@ -11,7 +11,7 @@
 ## Список заданий
 
 - [Chrome DevTools Simple][chrome1]
-- Refactoring Simple
+- [Refactoring Simple][refactoring1]
 
 ## Теория
 
@@ -25,3 +25,4 @@
 [notion2]: https://cultured-ozraraptor-779.notion.site/TCB-frontend-2-991049cd2a2e455994a199e23170ce5e
 [notion3]: https://cultured-ozraraptor-779.notion.site/TCB-frontend-3-d34b09eec31e47a68d1fcb407e339aec
 [chrome1]: https://github.com/Metastasis/homework/tree/chrome-devtools-simple
+[refactoring1]: https://github.com/Metastasis/homework/tree/refactoring-simple
