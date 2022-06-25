@@ -12,6 +12,7 @@
 
 - [Chrome DevTools Simple][chrome1]
 - [Refactoring Simple][refactoring1]
+- [Typescript simple][typescript1]
 
 ## Теория
 
@@ -26,3 +27,4 @@
 [notion3]: https://cultured-ozraraptor-779.notion.site/TCB-frontend-3-d34b09eec31e47a68d1fcb407e339aec
 [chrome1]: https://github.com/Metastasis/homework/tree/chrome-devtools-simple
 [refactoring1]: https://github.com/Metastasis/homework/tree/refactoring-simple
+[typescript1]: https://github.com/Metastasis/homework/tree/typescript-simple
