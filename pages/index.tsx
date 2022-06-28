@@ -1,9 +1,18 @@
+import React from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
+import {
+  search
+} from '@features/products'
+import {withBreakpoints} from '@features/helpers'
 import styles from './Home.module.css'
 
 const Home: NextPage = () => {
+  const [products, setProducts] = React.useState<any>([])
+  React.useEffect(() => {
+    search().then(setProducts)
+  }, [setProducts])
+  const Desc = withBreakpoints(Description)
   return (
     <div className={styles.container}>
       <Head>
@@ -11,60 +20,82 @@ const Home: NextPage = () => {
         <meta name="description" content="Небольшие домашки для закрепления теории" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Товары
         </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
-
+        <Desc />
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          {products.map((product: any) => <Product key={product.id} product={product} />)}
         </div>
       </main>
+    </div>
+  )
+}
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+function Description(props: {media: string}) {
+  const {media} = props
+  if (media === 'mobile') return null
+  return (
+    <p className={styles.description}>
+      Самые дешевые товары тут
+    </p>
+  );
+}
+
+function Product(props: {product: any}) {
+  const {product} = props
+  switch (product.categoryId) {
+    case '0':
+      return <ProductDefault product={product} />
+    case '1':
+      return <ProductMobilePhone product={product} />
+    case '2':
+      return <ProductMouse product={product} />
+    default:
+      // const p: never = product
+      // return p
+      return null
+  }
+}
+
+function ProductDefault(props: {product: any}) {
+  const {product} = props
+  return (
+    <div key={product.id} className={styles.card}>
+      <h3>{product.category}, {product.brand} {product.model}</h3>
+      <div className={styles.attributes}>
+        <div className={styles.attribute}>Цена: {product.price}</div>
+      </div>
+    </div>
+  )
+}
+
+function ProductMobilePhone(props: {product: any}) {
+  const {product} = props
+  return (
+    <div key={product.id} className={styles.card}>
+      <h3>{product.category}, {product.brand} {product.model}</h3>
+      <div className={styles.attributes}>
+        <div className={styles.attribute}>Цена: {product.price}</div>
+        <div className={styles.attribute}>Камера: {product.cameraBack}</div>
+        <div className={styles.attribute}>Камера (фронт): {product.cameraFront}</div>
+        <div className={styles.attribute}>Вес: {product.weight}</div>
+        <div className={styles.attribute}>Разрешение: {product.screenWidth}x{product.screenHeight}</div>
+      </div>
+    </div>
+  )
+}
+
+function ProductMouse(props: {product: any}) {
+  const {product} = props
+  return (
+    <div key={product.id} className={styles.card}>
+      <h3>{product.category}, {product.brand} {product.model}</h3>
+      <div className={styles.attributes}>
+        <div className={styles.attribute}>Цена: {product.price}</div>
+        <div className={styles.attribute}>Кнопок: {product.buttonsQty} шт.</div>
+      </div>
     </div>
   )
 }
